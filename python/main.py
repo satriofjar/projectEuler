@@ -25,5 +25,23 @@ def sol1b(x):
 def sol1c(x):
     return sum([i for i in range(3,x,3)]) + sum([i for i in range(5,x,5)]) - sum([i for i in range(15,x,15)])
 
+
+# Solutions problem 2
+
+def sol2(lim):
+    f0 = 0
+    fibo = 1
+    fhelper = 0
+    result = 0
+    while True:
+        fhelper = fibo
+        fibo = f0 + fibo
+        f0 = fhelper
+        result += fibo if fibo % 2 == 0 else 0
+        if fibo >= lim:
+            break
+
+    return result
+
 if __name__ == '__main__':
-    print(time_it(sol1c, 1000))
+    print(time_it(sol2, 4000000))
