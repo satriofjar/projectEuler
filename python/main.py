@@ -1,11 +1,6 @@
-import time
+from math import sqrt
+from helper import *
 
-
-def time_it(f, x):
-    start = time.time()
-    result = f(x)
-    end = time.time()
-    return (end - start, result)
 
 # Solutions problem 1
 
@@ -43,5 +38,24 @@ def sol2(lim):
 
     return result
 
+
+# Solutions problem 3
+
+def sol3(n):
+    return max(filter(is_prime, factors(n)))
+
+def sol3a(n):
+    akar_n = round(sqrt(n)) + 1
+    i = 3
+    res = 0
+
+    while i <= akar_n:
+        if n % i == 0:
+            if is_prime(i):
+                res = i
+        
+        i += 2
+    return res
+
 if __name__ == '__main__':
-    print(time_it(sol2, 4000000))
+    print(time_it(sol3a, 600851475143))
