@@ -38,6 +38,12 @@ def sol2(lim):
 
     return result
 
+def sol2a(a, b, lim, res):
+    if res >= lim :
+        return res
+    else:
+        return sol2a(b, a + b, lim, res + a if is_even(a) else res)
+
 
 # Solutions problem 3
 
@@ -57,5 +63,18 @@ def sol3a(n):
         i += 2
     return res
 
+
+    
+def sol3b(n, fak_n, res):
+    if len(fak_n) == 1 :
+        return fak_n[0]
+    if res > fak_n[0] if is_prime(fak_n[0]) else res:
+        return res
+    else:
+        return sol3b(n, fak_n[1:], fak_n[0])
+
+
 if __name__ == '__main__':
+    print(time_it(sol3, 600851475143))
     print(time_it(sol3a, 600851475143))
+    print(time_it(sol3b, 600851475143, factors(600851475143), 0))

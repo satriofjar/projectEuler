@@ -2,14 +2,17 @@ from math import sqrt
 import time
 
 
-def time_it(f, x):
+def time_it(f, *args):
     start = time.time()
-    result = f(x)
+    result = f(*args)
     end = time.time()
     return (end - start, result)
 
 def is_even(n):
     return True if n % 2 == 0 else False
+
+def is_zero(a, b):
+    return True if a % b == 0 else False
 
 def is_prime(n):
     akar_n = round(sqrt(n)) + 1
