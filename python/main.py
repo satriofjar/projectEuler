@@ -1,5 +1,6 @@
 from math import sqrt
 from helper import *
+from functools import reduce
 
 
 # Solutions problem 1
@@ -74,7 +75,28 @@ def sol3b(n, fak_n, res):
         return sol3b(n, fak_n[1:], fak_n[0])
 
 
+def sol4(start, end):
+    res = 0
+    for i in range(start, end):
+        for j in range(start, end):
+            x = i * j
+            if str(x) == str(x)[-1::-1]:
+                if res < x:
+                    res = x
+
+    return res
+
+
+
+# solve problem 4 but ribet
+def sol4a(start, end):
+    return max(map(int, 
+                   filter(lambda x : x == x[-1::-1], 
+                          reduce(lambda x, y: x + y ,
+                                 map(lambda x: [str(x * i) for i in range(start, end)], 
+                                     range(start, end))))))
+
+
 if __name__ == '__main__':
-    print(time_it(sol3, 600851475143))
-    print(time_it(sol3a, 600851475143))
-    print(time_it(sol3b, 600851475143, factors(600851475143), 0))
+    print(time_it(sol4, 900, 1000))
+    print(time_it(sol4a, 900, 1000))
