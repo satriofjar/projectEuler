@@ -130,5 +130,9 @@ def sol5b(n):
     return int(res)
 
 
+def sol6(n):
+    return (sum(range(n + 1)))** 2 - sum([i**2 for i in range(n + 1)])
+
+
 if __name__ == '__main__':
-    print(time_it(sol5b, 10))
+    print(time_it(sol6, 100))
