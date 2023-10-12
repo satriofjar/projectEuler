@@ -96,7 +96,39 @@ def sol4a(start, end):
                                  map(lambda x: [str(x * i) for i in range(start, end)], 
                                      range(start, end))))))
 
+# native solution for problem 5
+# (165.08255553245544, result => 232792560)
+def sol5(n):
+    i = reduce(lambda x, y: x * y , filter(is_prime, range(1, n + 1)))
+    while True:
+        if all([is_zero(i, a) for a in range(1, n + 1)]):
+            return i
+        
+        i += 10
+
+
+
+"gagal loop terlalu lama"
+def sol5a(n):
+    res = 2
+    
+    i = 2
+    while i <= n:
+        print(f'{i} => {res}')
+        res = kpk(fak_prime(i), fak_prime(res))
+        i += 1
+
+    return res
+
+
+"LCM => (a * b) / (gcd(a, b)) "
+def sol5b(n):
+    res = 1
+    for i in range(1, n + 1):
+        res = (i * res) / gcd(i, res)
+
+    return int(res)
+
 
 if __name__ == '__main__':
-    print(time_it(sol4, 900, 1000))
-    print(time_it(sol4a, 900, 1000))
+    print(time_it(sol5b, 10))
