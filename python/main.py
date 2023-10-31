@@ -1,5 +1,6 @@
 from math import sqrt
 from helper import *
+from functools import reduce
 
 
 # Solutions problem 1
@@ -38,6 +39,12 @@ def sol2(lim):
 
     return result
 
+def sol2a(a, b, lim, res):
+    if res >= lim :
+        return res
+    else:
+        return sol2a(b, a + b, lim, res + a if is_even(a) else res)
+
 
 # Solutions problem 3
 
@@ -57,5 +64,75 @@ def sol3a(n):
         i += 2
     return res
 
+
+    
+def sol3b(n, fak_n, res):
+    if len(fak_n) == 1 :
+        return fak_n[0]
+    if res > fak_n[0] if is_prime(fak_n[0]) else res:
+        return res
+    else:
+        return sol3b(n, fak_n[1:], fak_n[0])
+
+
+def sol4(start, end):
+    res = 0
+    for i in range(start, end):
+        for j in range(start, end):
+            x = i * j
+            if str(x) == str(x)[-1::-1]:
+                if res < x:
+                    res = x
+
+    return res
+
+
+
+# solve problem 4 but ribet
+def sol4a(start, end):
+    return max(map(int, 
+                   filter(lambda x : x == x[-1::-1], 
+                          reduce(lambda x, y: x + y ,
+                                 map(lambda x: [str(x * i) for i in range(start, end)], 
+                                     range(start, end))))))
+
+# native solution for problem 5
+# (165.08255553245544, result => 232792560)
+def sol5(n):
+    i = reduce(lambda x, y: x * y , filter(is_prime, range(1, n + 1)))
+    while True:
+        if all([is_zero(i, a) for a in range(1, n + 1)]):
+            return i
+        
+        i += 10
+
+
+
+"gagal loop terlalu lama"
+def sol5a(n):
+    res = 2
+    
+    i = 2
+    while i <= n:
+        print(f'{i} => {res}')
+        res = kpk(fak_prime(i), fak_prime(res))
+        i += 1
+
+    return res
+
+
+"LCM => (a * b) / (gcd(a, b)) "
+def sol5b(n):
+    res = 1
+    for i in range(1, n + 1):
+        res = (i * res) / gcd(i, res)
+
+    return int(res)
+
+
+def sol6(n):
+    return (sum(range(n + 1)))** 2 - sum([i**2 for i in range(n + 1)])
+
+
 if __name__ == '__main__':
-    print(time_it(sol3a, 600851475143))
+    print(time_it(sol6, 100))
